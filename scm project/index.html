@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartRaid - Ride Safe • Reach Faster | PC Ride Booking Portal</title>
+    <meta name="description"
+        content="SmartRaid - Fast, safe, and affordable ride booking platform for PC screens. Interactive 8-screen working model with real Leaflet maps and live GPS tracking.">
+
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+
+    <!-- Application CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="pc-website-body">
+
+    <!-- ========================================================
+         DESKTOP TOP NAVIGATION BAR
+         ======================================================== -->
+    <header class="desktop-navbar">
+        <div class="nav-max-container">
+            <!-- Brand Logo -->
+            <a href="#login" class="nav-brand" onclick="navigateToScreen('screen-login'); return false;">
+                <div class="nav-logo-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="nav-brand-text">
+                    <span class="brand-name">SmartRaid</span>
+                    <span class="brand-tagline">Ride Safe • Reach Faster</span>
+                </div>
+            </a>
+
+            <!-- Sequential Step Progression Bar (1 to 8) -->
+            <nav class="desktop-step-navigator" aria-label="Process Progression">
+                <button type="button" class="d-step-chip active" data-screen="screen-login" id="nav-screen-login"
+                    onclick="navigateToScreen('screen-login')">
+                    <span class="num">1</span> <span class="txt">Login</span>
+                </button>
+                <div class="step-connector"></div>
+                <button type="button" class="d-step-chip" data-screen="screen-signup" id="nav-screen-signup"
+                    onclick="navigateToScreen('screen-signup')">
+                    <span class="num">2</span> <span class="txt">Sign Up</span>
+                </button>
+                <div class="step-connector"></div>
+                <button type="button" class="d-step-chip" data-screen="screen-where-to" id="nav-screen-where-to"
+                    onclick="navigateToScreen('screen-where-to')">
+                    <span class="num">3</span> <span class="txt">Where to?</span>
+                </button>
+                <div class="step-connector"></div>
+                <button type="button" class="d-step-chip" data-screen="screen-choose-vehicle"
+                    id="nav-screen-choose-vehicle" onclick="navigateToScreen('screen-choose-vehicle')">
+                    <span class="num">4</span> <span class="txt">Vehicle</span>
+                </button>
+                <div class="step-connector"></div>
+                <button type="button" class="d-step-chip" data-screen="screen-payment" id="nav-screen-payment"
+                    onclick="navigateToScreen('screen-payment')">
+                    <span class="num">5</span> <span class="txt">Payment</span>
+                </button>
+                <div class="step-connector"></div>
+                <button type="button" class="d-step-chip" data-screen="screen-payment-success"
+                    id="nav-screen-payment-success" onclick="navigateToScreen('screen-payment-success')">
+                    <span class="num">6</span> <span class="txt">Confirmed</span>
+                </button>
+                <div class="step-connector"></div>
+                <button type="button" class="d-step-chip" data-screen="screen-on-the-way" id="nav-screen-on-the-way"
+                    onclick="navigateToScreen('screen-on-the-way')">
+                    <span class="num">7</span> <span class="txt">On the Way</span>
+                </button>
+                <div class="step-connector"></div>
+                <button type="button" class="d-step-chip" data-screen="screen-rating" id="nav-screen-rating"
+                    onclick="navigateToScreen('screen-rating')">
+                    <span class="num">8</span> <span class="txt">Feedback</span>
+                </button>
+            </nav>
+
+            <!-- Top Right Action: Persistent WhatsApp SOS Button & User Profile -->
+            <div class="nav-right-actions">
+                <button type="button" class="desktop-sos-btn" id="btnTopSos" onclick="handleSosClick()"
+                    title="Click 3 times to send emergency WhatsApp message to 9342900780">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span class="sos-text">SOS EMERGENCY</span>
+                    <span class="sos-badge" id="topSosBadge">3 Clicks to WhatsApp (9342900780)</span>
+                </button>
+
+                <div class="user-profile-pill">
+                    <img src="assets/driver_ravi.jpg" alt="User Profile" class="user-avatar-mini">
+                    <span class="user-name-label">Ruban</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================================
+         MAIN DESKTOP APPLICATION VIEWPORT
+         ======================================================== -->
+    <main class="desktop-main-wrapper">
+        <div class="desktop-content-container">
+
+            <!-- ====================================================
+                 SCREEN 1: LOGIN (PC SCREEN 2-COLUMN SPLIT)
+                 ==================================================== -->
+            <section class="desktop-screen-card active" id="screen-login">
+                <div class="pc-split-grid">
+                    <!-- Left Hero Showcase Column -->
+                    <div class="pc-hero-col login-visual-col">
+                        <div class="hero-bg-overlay"></div>
+                        <div class="hero-visual-content">
+                            <div class="hero-logo-box">
+                                <div class="nav-logo-icon large"><i class="fa-solid fa-location-dot"></i></div>
+                                <h1 class="hero-title">SmartRaid</h1>
+                                <p class="hero-tagline">Ride Safe • Reach Faster</p>
+                            </div>
+
+                            <div class="hero-features-list">
+                                <div class="h-feature-item">
+                                    <div class="feat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                                    <div>
+                                        <h4>100% Verified Drivers</h4>
+                                        <p>Travel with verified, professional partners</p>
+                                    </div>
+                                </div>
+                                <div class="h-feature-item">
+                                    <div class="feat-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                                    <div>
+                                        <h4>Live Real-Time GPS</h4>
+                                        <p>Accurate live route tracking and telemetry</p>
+                                    </div>
+                                </div>
+                                <div class="h-feature-item">
+                                    <div class="feat-icon"><i class="fa-solid fa-bell"></i></div>
+                                    <div>
+                                        <h4>3-Click WhatsApp SOS</h4>
+                                        <p>Instant direct emergency alert to 9342900780</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Form Column -->
+                    <div class="pc-form-col">
+                        <div class="form-container-inner">
+                            <div class="form-header-row">
+                                <div>
+                                    <h2 class="pc-heading">Login</h2>
+                                    <p class="pc-subheading">Welcome back! Please login to continue.</p>
+                                </div>
+                            </div>
+
+                            <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+                                <div class="desktop-form-group">
+                                    <label class="d-label">Email or Mobile Number</label>
+                                    <div class="d-input-box">
+                                        <i class="fa-solid fa-user input-icon"></i>
+                                        <input type="text" id="loginIdentifier" class="d-input"
+                                            placeholder="Enter email or mobile number" value="ruban@smartraid.in"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="desktop-form-group">
+                                    <label class="d-label">Password</label>
+                                    <div class="d-input-box">
+                                        <i class="fa-solid fa-lock input-icon"></i>
+                                        <input type="password" id="loginPassword" class="d-input"
+                                            placeholder="Enter password" value="••••••••" required>
+                                        <button type="button" class="btn-toggle-eye"
+                                            onclick="togglePasswordVisibility('loginPassword', this)">
+                                            <i class="fa-regular fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="forgot-row">
+                                    <a href="#forgot" class="d-link"
+                                        onclick="openToast('Password reset link sent to your email!'); return false;">Forgot
+                                        Password?</a>
+                                </div>
+
+                                <button type="submit" class="btn-desktop-primary" id="btnLoginSubmit">
+                                    <span>Login</span>
+                                </button>
+
+                                <div class="desktop-divider">
+                                    <span>or</span>
+                                </div>
+
+                                <button type="button" class="btn-google-large" onclick="handleSocialLogin('Google')">
+                                    <svg class="google-svg" viewBox="0 0 24 24" width="20" height="20">
+                                        <path fill="#4285F4"
+                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853"
+                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05"
+                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                                        <path fill="#EA4335"
+                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                                    </svg>
+                                    <span>Continue with Google</span>
+                                </button>
+
+                                <div class="d-bottom-prompt">
+                                    <span>Don't have an account?</span>
+                                    <a href="#signup" class="prompt-link"
+                                        onclick="navigateToScreen('screen-signup'); return false;">Sign Up</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 SCREEN 2: CREATE YOUR ACCOUNT (SIGN UP - PC SCREEN)
+                 ==================================================== -->
+            <section class="desktop-screen-card" id="screen-signup">
+                <div class="pc-split-grid">
+                    <!-- Left Illustration Column -->
+                    <div class="pc-hero-col signup-visual-col">
+                        <div class="signup-visual-inner">
+                            <div class="nav-logo-icon large"><i class="fa-solid fa-location-dot"></i></div>
+                            <h2 class="hero-title">SmartRaid</h2>
+                            <p class="hero-tagline">Ride Safe • Reach Faster</p>
+                            <p class="signup-intro-p">Join over 250,000+ passengers who choose SmartRaid daily for fast,
+                                comfortable, and affordable rides.</p>
+
+                            <div class="signup-art-container">
+                                <img src="assets/signup_illustration.jpg" alt="SmartRaid City Fleet"
+                                    class="signup-art-image">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Form Column with Back Button -->
+                    <div class="pc-form-col">
+                        <div class="form-container-inner">
+                            <!-- Back Button Row -->
+                            <div class="pc-card-topbar">
+                                <button type="button" class="btn-pc-back" onclick="navigateToScreen('screen-login')"
+                                    title="Back to Login">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                    <span>Back to Login</span>
+                                </button>
+                            </div>
+
+                            <h2 class="pc-heading">Create Your Account</h2>
+                            <p class="pc-subheading">Join SmartRaid and book your next ride easily.</p>
+
+                            <form id="signupForm" onsubmit="handleSignupSubmit(event)">
+                                <div class="desktop-form-group">
+                                    <label class="d-label">Full Name</label>
+                                    <div class="d-input-box">
+                                        <i class="fa-regular fa-user input-icon"></i>
+                                        <input type="text" id="signupName" class="d-input"
+                                            placeholder="Enter your full name" value="Ruban Kumar" required>
+                                    </div>
+                                </div>
+
+                                <div class="desktop-form-group">
+                                    <label class="d-label">Mobile Number</label>
+                                    <div class="d-input-box">
+                                        <i class="fa-solid fa-mobile-screen input-icon"></i>
+                                        <input type="tel" id="signupMobile" class="d-input"
+                                            placeholder="Enter 10-digit mobile number" value="9342900780" required>
+                                    </div>
+                                </div>
+
+                                <div class="desktop-form-group">
+                                    <label class="d-label">Email Address</label>
+                                    <div class="d-input-box">
+                                        <i class="fa-regular fa-envelope input-icon"></i>
+                                        <input type="email" id="signupEmail" class="d-input"
+                                            placeholder="Enter your email" value="ruban@smartraid.in" required>
+                                    </div>
+                                </div>
+
+                                <div class="desktop-form-group">
+                                    <label class="d-label">Password</label>
+                                    <div class="d-input-box">
+                                        <i class="fa-solid fa-lock input-icon"></i>
+                                        <input type="password" id="signupPassword" class="d-input"
+                                            placeholder="Create a secure password" value="SecurePass123" required>
+                                        <button type="button" class="btn-toggle-eye"
+                                            onclick="togglePasswordVisibility('signupPassword', this)">
+                                            <i class="fa-regular fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn-desktop-primary" id="btnSignupSubmit">
+                                    <span>Sign Up</span>
+                                </button>
+
+                                <div class="d-bottom-prompt">
+                                    <span>Already have an account?</span>
+                                    <a href="#login" class="prompt-link"
+                                        onclick="navigateToScreen('screen-login'); return false;">Login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 SCREEN 3: WHERE TO? (LOCATIONS & REAL MAP - PC SCREEN)
+                 ==================================================== -->
+            <section class="desktop-screen-card" id="screen-where-to">
+                <div class="pc-layout-header">
+                    <button type="button" class="btn-pc-back" onclick="navigateToScreen('screen-login')"
+                        title="Back to Login">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                    <div class="pc-header-title-group">
+                        <h2 class="pc-heading-title">Where to?</h2>
+                        <span class="pc-heading-sub">Enter your pickup and drop locations to find nearby rides</span>
+                    </div>
+                    <div class="pc-header-meta">
+                        <span class="grid-status-badge"><i class="fa-solid fa-circle-dot"></i> Live Vellore GPS
+                            Active</span>
+                    </div>
+                </div>
+
+                <div class="pc-screen-2col">
+                    <!-- Left Control Panel (Inputs & Route Summary) -->
+                    <div class="pc-sidebar-panel">
+                        <!-- Location Inputs Card -->
+                        <div class="desktop-loc-card">
+                            <!-- Pickup -->
+                            <div class="desktop-loc-row">
+                                <div class="loc-badge-icon pickup-bg">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="loc-input-col">
+                                    <span class="loc-caption">Pickup Location (Drag Pin or Type)</span>
+                                    <input type="text" id="inputPickup" class="loc-field-text"
+                                        value="VIT University, Vellore" placeholder="Enter pickup address"
+                                        autocomplete="off" onfocus="handleLocInputFocus('pickup')"
+                                        oninput="handleLocInputChange('pickup', this.value)"
+                                        onchange="handleLocFieldCommit('pickup', this.value)">
+                                    <div class="loc-dropdown-menu" id="dropdownPickup"></div>
+                                </div>
+                                <button type="button" class="btn-clear-field" onclick="clearLocation('pickup')"
+                                    title="Clear"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+
+                            <!-- Swap Row -->
+                            <div class="desktop-swap-row">
+                                <div class="dashed-connector"></div>
+                                <button type="button" class="btn-swap-desktop" onclick="swapLocations()"
+                                    title="Swap Locations">
+                                    <i class="fa-solid fa-arrow-down-up-across-line"></i>
+                                    <span>Swap Route</span>
+                                </button>
+                            </div>
+
+                            <!-- Drop -->
+                            <div class="desktop-loc-row">
+                                <div class="loc-badge-icon drop-bg">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div class="loc-input-col">
+                                    <span class="loc-caption">Drop Location (Drag Pin or Type)</span>
+                                    <input type="text" id="inputDrop" class="loc-field-text" value="Katpadi, Vellore"
+                                        placeholder="Enter destination" autocomplete="off"
+                                        onfocus="handleLocInputFocus('drop')"
+                                        oninput="handleLocInputChange('drop', this.value)"
+                                        onchange="handleLocFieldCommit('drop', this.value)">
+                                    <div class="loc-dropdown-menu" id="dropdownDrop"></div>
+                                </div>
+                                <button type="button" class="btn-clear-field" onclick="clearLocation('drop')"
+                                    title="Clear"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Quick Popular Landmark Chips with Target Selector -->
+                        <div class="quick-landmarks-card">
+                            <div class="ql-header-row">
+                                <span class="ql-header"><i class="fa-solid fa-sparkles text-amber"></i> Quick Select
+                                    Locations:</span>
+                                <div class="ql-target-toggle">
+                                    <span class="ql-target-label">Apply to:</span>
+                                    <button type="button" class="btn-ql-target active" id="targetDropBtn"
+                                        onclick="setQuickPickTarget('drop')" title="Set as Destination">📍 Destination
+                                        (Drop)</button>
+                                    <button type="button" class="btn-ql-target" id="targetPickupBtn"
+                                        onclick="setQuickPickTarget('pickup')" title="Set as Pickup">🟢 Pickup</button>
+                                </div>
+                            </div>
+                            <div class="ql-chips-list">
+                                <button type="button" class="ql-btn"
+                                    onclick="quickPickLocation('VIT University, Vellore', [12.9698, 79.1559])"><i
+                                        class="fa-solid fa-graduation-cap"></i> VIT University</button>
+                                <button type="button" class="ql-btn"
+                                    onclick="quickPickLocation('Katpadi Railway Station, Vellore', [12.9785, 79.1385])"><i
+                                        class="fa-solid fa-train"></i> Katpadi Station</button>
+                                <button type="button" class="ql-btn"
+                                    onclick="quickPickLocation('Vellore New Bus Stand', [12.9348, 79.1412])"><i
+                                        class="fa-solid fa-bus"></i> New Bus Stand</button>
+                                <button type="button" class="ql-btn"
+                                    onclick="quickPickLocation('CMC Hospital, Vellore', [12.9250, 79.1340])"><i
+                                        class="fa-solid fa-hospital"></i> CMC Hospital</button>
+                                <button type="button" class="ql-btn"
+                                    onclick="quickPickLocation('Vellore Fort', [12.9205, 79.1325])"><i
+                                        class="fa-solid fa-landmark"></i> Vellore Fort</button>
+                                <button type="button" class="ql-btn"
+                                    onclick="quickPickLocation('Sripuram Golden Temple', [12.8718, 79.0888])"><i
+                                        class="fa-solid fa-place-of-worship"></i> Golden Temple</button>
+                                <button type="button" class="ql-btn"
+                                    onclick="quickPickLocation('Sathuvachari Phase 1, Vellore', [12.9360, 79.1670])"><i
+                                        class="fa-solid fa-building"></i> Sathuvachari</button>
+                                <button type="button" class="ql-btn"
+                                    onclick="quickPickLocation('Bagayam CMC Campus, Vellore', [12.8795, 79.1345])"><i
+                                        class="fa-solid fa-tree"></i> Bagayam</button>
+                            </div>
+                        </div>
+
+                        <!-- Route Metrics Preview --><!-- Route Metrics Preview -->
+                        <div class="route-metrics-card">
+                            <div class="metric-segment">
+                                <span class="m-label">Distance</span>
+                                <h3 class="m-val" id="metricDist">5.2 km</h3>
+                            </div>
+                            <div class="metric-divider"></div>
+                            <div class="metric-segment">
+                                <span class="m-label">Estimated Time</span>
+                                <h3 class="m-val" id="metricTime">12 mins</h3>
+                            </div>
+                            <div class="metric-divider"></div>
+                            <div class="metric-segment">
+                                <span class="m-label">Traffic</span>
+                                <h3 class="m-val text-success">Normal</h3>
+                            </div>
+                        </div>
+
+                        <!-- Highlights Strip -->
+                        <div class="desktop-benefits-card">
+                            <div class="benefit-item">
+                                <i class="fa-solid fa-bolt text-amber"></i>
+                                <span>Driver arrives in <strong>2-3 mins</strong></span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fa-solid fa-shield-halved text-primary"></i>
+                                <span>24/7 Verified Safety Monitoring</span>
+                            </div>
+                        </div>
+
+                        <!-- Search Ride CTA -->
+                        <button type="button" class="btn-desktop-primary btn-search-ride" id="btnSearchRide"
+                            onclick="handleSearchRide()">
+                            <span>Search Ride</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Right Column: Real Leaflet Map -->
+                    <div class="pc-map-panel">
+                        <div class="leaflet-map-wrapper">
+                            <div id="whereToMap" class="full-desktop-map"></div>
+
+                            <!-- Floating Map Control Box -->
+                            <div class="map-floating-ctrls">
+                                <div class="map-route-pill">
+                                    <span class="pill-point" id="mapPillPickup">VIT University</span>
+                                    <i class="fa-solid fa-arrow-right pill-arrow"></i>
+                                    <span class="pill-point" id="mapPillDrop">Katpadi</span>
+                                    <span class="pill-tag" id="mapPillDist">5.2 km</span>
+                                </div>
+                                <div class="map-hint-pill">
+                                    <i class="fa-solid fa-hand-pointer text-amber"></i>
+                                    <span>Drag pins or click map</span>
+                                </div>
+                                <div class="map-style-selector" role="group" aria-label="Map Style Switcher">
+                                    <button type="button" class="btn-map-style active" data-style="voyager"
+                                        onclick="setMapStyle('voyager')" title="Real Streets Navigation">
+                                        <i class="fa-solid fa-diamond-turn-right"></i> Streets
+                                    </button>
+                                    <button type="button" class="btn-map-style" data-style="satellite"
+                                        onclick="setMapStyle('satellite')" title="Real Satellite Aerial View">
+                                        <i class="fa-solid fa-satellite"></i> Satellite
+                                    </button>
+                                    <button type="button" class="btn-map-style" data-style="esriStreet"
+                                        onclick="setMapStyle('esriStreet')" title="ArcGIS HD Street Cartography">
+                                        <i class="fa-solid fa-layer-group"></i> HD Map
+                                    </button>
+                                    <button type="button" class="btn-map-style" data-style="dark"
+                                        onclick="setMapStyle('dark')" title="Night Dark Mode">
+                                        <i class="fa-solid fa-moon"></i> Night
+                                    </button>
+                                </div>
+                                <button type="button" class="btn-map-action" onclick="recenterWhereToMap()"
+                                    title="Recenter Route">
+                                    <i class="fa-solid fa-crosshairs"></i> Recenter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 SCREEN 4: CHOOSE YOUR VEHICLE (PC SCREEN)
+                 ==================================================== -->
+            <section class="desktop-screen-card" id="screen-choose-vehicle">
+                <div class="pc-layout-header">
+                    <button type="button" class="btn-pc-back" onclick="navigateToScreen('screen-where-to')"
+                        title="Back to Where to?">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                    <div class="pc-header-title-group">
+                        <h2 class="pc-heading-title">Choose Your Vehicle</h2>
+                        <span class="pc-heading-sub">Select the ride option that best suits your travel
+                            preferences</span>
+                    </div>
+                    <div class="pc-header-meta">
+                        <span class="route-quick-pill" id="vehicleScreenRoutePill">VIT University ➔ Katpadi (5.2
+                            km)</span>
+                    </div>
+                </div>
+
+                <div class="pc-screen-2col">
+                    <!-- Left: Vehicle Options List -->
+                    <div class="pc-sidebar-panel">
+                        <div class="desktop-vehicle-cards-list">
+                            <!-- Option 1: Auto (Default Selected) -->
+                            <div class="d-vehicle-card active" data-vehicle="auto" data-fare="60"
+                                onclick="selectVehicle('auto', 60, this)">
+                                <div class="v-img-box">
+                                    <img src="assets/auto.jpg" alt="SmartRaid Auto" class="v-img">
+                                </div>
+                                <div class="v-info-box">
+                                    <div class="v-title-row">
+                                        <h3 class="v-name">Auto</h3>
+                                        <span class="v-eta-chip">2 min away</span>
+                                    </div>
+                                    <div class="v-features">
+                                        <span><i class="fa-solid fa-user"></i> 3 Passengers</span>
+                                        <span><i class="fa-solid fa-bolt"></i> Fast & Affordable</span>
+                                    </div>
+                                </div>
+                                <div class="v-price-box">
+                                    <span class="v-fare" id="fareAuto">₹ 60</span>
+                                    <span class="v-approx">(approx.)</span>
+                                    <div class="custom-radio-lg checked"></div>
+                                </div>
+                            </div>
+
+                            <!-- Option 2: Bike -->
+                            <div class="d-vehicle-card" data-vehicle="bike" data-fare="40"
+                                onclick="selectVehicle('bike', 40, this)">
+                                <div class="v-img-box">
+                                    <img src="assets/bike.jpg" alt="SmartRaid Bike" class="v-img">
+                                </div>
+                                <div class="v-info-box">
+                                    <div class="v-title-row">
+                                        <h3 class="v-name">Bike</h3>
+                                        <span class="v-eta-chip">1 min away</span>
+                                    </div>
+                                    <div class="v-features">
+                                        <span><i class="fa-solid fa-user"></i> 1 Passenger</span>
+                                        <span><i class="fa-solid fa-bolt"></i> Quick & Easy</span>
+                                    </div>
+                                </div>
+                                <div class="v-price-box">
+                                    <span class="v-fare" id="fareBike">₹ 40</span>
+                                    <span class="v-approx">(approx.)</span>
+                                    <div class="custom-radio-lg"></div>
+                                </div>
+                            </div>
+
+                            <!-- Option 3: Car -->
+                            <div class="d-vehicle-card" data-vehicle="car" data-fare="120"
+                                onclick="selectVehicle('car', 120, this)">
+                                <div class="v-img-box">
+                                    <img src="assets/car.jpg" alt="SmartRaid Car" class="v-img">
+                                </div>
+                                <div class="v-info-box">
+                                    <div class="v-title-row">
+                                        <h3 class="v-name">Car</h3>
+                                        <span class="v-eta-chip">4 min away</span>
+                                    </div>
+                                    <div class="v-features">
+                                        <span><i class="fa-solid fa-user"></i> 4 Passengers</span>
+                                        <span><i class="fa-solid fa-shield-halved"></i> Comfortable AC Ride</span>
+                                    </div>
+                                </div>
+                                <div class="v-price-box">
+                                    <span class="v-fare" id="fareCar">₹ 120</span>
+                                    <span class="v-approx">(approx.)</span>
+                                    <div class="custom-radio-lg"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Continue Button -->
+                        <button type="button" class="btn-desktop-primary mt-20" id="btnContinueVehicle"
+                            onclick="handleContinueVehicle()">
+                            <span>Continue to Payment</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Right: Trip Preview & Fare Breakdown Card -->
+                    <div class="pc-map-panel">
+                        <div class="vehicle-preview-dashboard">
+                            <div class="preview-hero-banner">
+                                <div class="preview-hero-info">
+                                    <span class="preview-badge">Selected Vehicle</span>
+                                    <h3 class="preview-title" id="previewVehicleTitle">Auto</h3>
+                                    <p class="preview-desc" id="previewVehicleDesc">TVS King 3-Wheeler • Clean &
+                                        Sanitized • Verified Driver</p>
+                                </div>
+                                <div class="preview-hero-img-box">
+                                    <img src="assets/auto.jpg" alt="Selected Ride" id="previewVehicleImg"
+                                        class="preview-hero-img">
+                                </div>
+                            </div>
+
+                            <!-- Fare Details Card -->
+                            <div class="desktop-fare-breakdown-card">
+                                <h4 class="card-section-title">Fare Breakdown</h4>
+                                <div class="fare-row">
+                                    <span>Base Fare & Minimum Distance</span>
+                                    <span class="fare-val" id="fareBase">₹ 45</span>
+                                </div>
+                                <div class="fare-row">
+                                    <span>Distance Charge (5.2 km)</span>
+                                    <span class="fare-val" id="fareDist">₹ 15</span>
+                                </div>
+                                <div class="fare-row">
+                                    <span>Ride Booking Fee & Insurance</span>
+                                    <span class="fare-val text-success">FREE</span>
+                                </div>
+                                <hr class="fare-divider">
+                                <div class="fare-row total-fare-row">
+                                    <span class="font-bold">Total Estimated Fare</span>
+                                    <span class="total-fare-price" id="fareTotal">₹ 60</span>
+                                </div>
+                            </div>
+
+                            <!-- Safety & Driver Promise -->
+                            <div class="driver-safety-promise-box">
+                                <div class="promise-item">
+                                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                                    <span>No surge pricing surprise — Guaranteed fixed price</span>
+                                </div>
+                                <div class="promise-item">
+                                    <i class="fa-solid fa-shield-cat"></i>
+                                    <span>24/7 Safety Desk & Live Trip Telemetry Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 SCREEN 5: PAYMENT (PC SCREEN)
+                 ==================================================== -->
+            <section class="desktop-screen-card" id="screen-payment">
+                <div class="pc-layout-header">
+                    <button type="button" class="btn-pc-back" onclick="navigateToScreen('screen-choose-vehicle')"
+                        title="Back to Vehicle Selection">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                    <div class="pc-header-title-group">
+                        <h2 class="pc-heading-title">Payment</h2>
+                        <span class="pc-heading-sub">Choose your preferred payment method and confirm booking</span>
+                    </div>
+                    <div class="pc-header-meta">
+                        <span class="ssl-badge"><i class="fa-solid fa-lock"></i> 256-Bit SSL Encrypted</span>
+                    </div>
+                </div>
+
+                <div class="pc-screen-2col">
+                    <!-- Left Column: Selected Ride Summary -->
+                    <div class="pc-sidebar-panel">
+                        <div class="desktop-trip-receipt-card">
+                            <h3 class="panel-card-title">Ride Summary</h3>
+                            <div class="receipt-vehicle-header">
+                                <img src="assets/auto.jpg" alt="Selected Vehicle" id="paySummaryThumb"
+                                    class="receipt-v-img">
+                                <div>
+                                    <h4 class="receipt-v-title" id="paySummaryTitle">Auto</h4>
+                                    <span class="receipt-v-route" id="paySummaryRoute">VIT University → Katpadi</span>
+                                </div>
+                                <div class="receipt-v-fare" id="paySummaryFare">₹ 60</div>
+                            </div>
+
+                            <div class="receipt-breakdown-list">
+                                <div class="rb-item">
+                                    <span class="rb-label">Pickup Point</span>
+                                    <span class="rb-value" id="payPickupVal">VIT University, Vellore</span>
+                                </div>
+                                <div class="rb-item">
+                                    <span class="rb-label">Drop Destination</span>
+                                    <span class="rb-value" id="payDropVal">Katpadi, Vellore</span>
+                                </div>
+                                <div class="rb-item">
+                                    <span class="rb-label">Total Distance</span>
+                                    <span class="rb-value">5.2 km • 12 mins</span>
+                                </div>
+                            </div>
+
+                            <hr class="fare-divider">
+                            <div class="total-payable-bar">
+                                <span>Total Amount to Pay</span>
+                                <span class="total-big-val" id="payTotalBig">₹ 60</span>
+                            </div>
+                        </div>
+
+                        <!-- 100% Safe Payment Box -->
+                        <div class="secure-badge-box">
+                            <div class="secure-icon-wrap"><i class="fa-solid fa-shield-halved"></i></div>
+                            <div>
+                                <h4>100% Secure & Protected Payment</h4>
+                                <p>Bank-grade encryption backed by Razorpay. Zero hidden charges.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Payment Methods List & Pay Button -->
+                    <div class="pc-map-panel">
+                        <div class="payment-methods-desktop-box">
+                            <h3 class="panel-card-title">Select Payment Method</h3>
+
+                            <div class="payment-options-grid">
+                                <!-- Option 1: UPI -->
+                                <div class="desktop-pay-card active" data-method="upi"
+                                    onclick="selectPaymentMethod('upi', this)">
+                                    <div class="custom-radio-lg checked"></div>
+                                    <div class="pay-icon-box upi-bg"><i class="fa-solid fa-qrcode"></i></div>
+                                    <div class="pay-text-col">
+                                        <h4 class="pay-title">UPI</h4>
+                                        <p class="pay-desc">Google Pay, PhonePe, Paytm, or BHIM</p>
+                                    </div>
+                                    <span class="method-tag text-success">Instant</span>
+                                </div>
+
+                                <!-- Option 2: Cards -->
+                                <div class="desktop-pay-card" data-method="card"
+                                    onclick="selectPaymentMethod('card', this)">
+                                    <div class="custom-radio-lg"></div>
+                                    <div class="pay-icon-box card-bg"><i class="fa-regular fa-credit-card"></i></div>
+                                    <div class="pay-text-col">
+                                        <h4 class="pay-title">Credit / Debit Card</h4>
+                                        <p class="pay-desc">Visa, MasterCard, RuPay & American Express</p>
+                                    </div>
+                                </div>
+
+                                <!-- Option 3: Net Banking -->
+                                <div class="desktop-pay-card" data-method="netbanking"
+                                    onclick="selectPaymentMethod('netbanking', this)">
+                                    <div class="custom-radio-lg"></div>
+                                    <div class="pay-icon-box bank-bg"><i class="fa-solid fa-building-columns"></i></div>
+                                    <div class="pay-text-col">
+                                        <h4 class="pay-title">Net Banking</h4>
+                                        <p class="pay-desc">All Major Indian Banks Supported</p>
+                                    </div>
+                                </div>
+
+                                <!-- Option 4: Wallet -->
+                                <div class="desktop-pay-card" data-method="wallet"
+                                    onclick="selectPaymentMethod('wallet', this)">
+                                    <div class="custom-radio-lg"></div>
+                                    <div class="pay-icon-box wallet-bg"><i class="fa-solid fa-wallet"></i></div>
+                                    <div class="pay-text-col">
+                                        <h4 class="pay-title">Wallet / Cash</h4>
+                                        <p class="pay-desc">SmartRaid Wallet or Pay Cash to Driver</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pay Now CTA -->
+                            <div class="payment-action-bottom">
+                                <button type="button" class="btn-desktop-primary btn-pay-now-large" id="btnPayNow"
+                                    onclick="handlePayNow()">
+                                    <span id="payNowBtnText">Pay ₹60 & Confirm Ride</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 SCREEN 6: PAYMENT SUCCESSFUL! (CONFIRMATION - PC SCREEN)
+                 ==================================================== -->
+            <section class="desktop-screen-card" id="screen-payment-success">
+                <!-- Confetti Canvas -->
+                <canvas id="successConfettiCanvas" class="desktop-confetti-canvas"></canvas>
+
+                <div class="confirmation-desktop-container">
+                    <!-- Top Back Button -->
+                    <div class="confirm-topbar">
+                        <button type="button" class="btn-pc-back" onclick="navigateToScreen('screen-payment')"
+                            title="Back to Payment">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Back</span>
+                        </button>
+                    </div>
+
+                    <!-- Animated Celebration Box -->
+                    <div class="celebration-center-box">
+                        <div class="success-icon-wrap">
+                            <div class="success-check-circle"><i class="fa-solid fa-check"></i></div>
+                            <div class="success-ring-ripple"></div>
+                        </div>
+
+                        <h2 class="confirm-headline">Payment Successful!</h2>
+                        <p class="confirm-subheadline">Your ride has been booked and driver is assigned to your
+                            location.</p>
+
+                        <!-- Receipt Details Card -->
+                        <div class="desktop-receipt-table-card">
+                            <div class="receipt-header-row">
+                                <span class="rh-lbl">Booking Reference</span>
+                                <div class="rh-id-box">
+                                    <span class="rh-id" id="confirmReceiptBookingId">#SR123456</span>
+                                    <button type="button" class="btn-copy-id" onclick="copyBookingId()"
+                                        title="Copy ID"><i class="fa-regular fa-copy"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="receipt-grid-3col">
+                                <div class="rg-col">
+                                    <span class="rg-label">Vehicle Booked</span>
+                                    <h4 class="rg-val" id="confirmReceiptVehicle">Auto</h4>
+                                </div>
+                                <div class="rg-col">
+                                    <span class="rg-label">Pickup Point</span>
+                                    <h4 class="rg-val" id="confirmReceiptPickup">VIT University, Vellore</h4>
+                                </div>
+                                <div class="rg-col">
+                                    <span class="rg-label">Drop Destination</span>
+                                    <h4 class="rg-val" id="confirmReceiptDrop">Katpadi, Vellore</h4>
+                                </div>
+                            </div>
+
+                            <div class="receipt-footer-row">
+                                <span class="rf-lbl">Amount Paid (Confirmed)</span>
+                                <span class="rf-amount text-primary" id="confirmReceiptAmount">₹ 60</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons Row -->
+                        <div class="confirm-actions-row">
+                            <button type="button" class="btn-desktop-primary btn-view-tracking"
+                                onclick="navigateToScreen('screen-on-the-way')">
+                                <i class="fa-solid fa-location-crosshairs"></i>
+                                <span>View Ride Details / Track Live GPS</span>
+                            </button>
+                            <button type="button" class="btn-desktop-outline"
+                                onclick="navigateToScreen('screen-where-to')">
+                                <i class="fa-solid fa-house"></i>
+                                <span>Back to Home</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 SCREEN 7: ON THE WAY (LIVE GPS TRACKING & SOS - PC SCREEN)
+                 ==================================================== -->
+            <section class="desktop-screen-card" id="screen-on-the-way">
+                <div class="pc-layout-header">
+                    <button type="button" class="btn-pc-back" onclick="navigateToScreen('screen-payment-success')"
+                        title="Back to Confirmation">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back</span>
+                    </button>
+                    <div class="pc-header-title-group">
+                        <h2 class="pc-heading-title">On the Way</h2>
+                        <span class="pc-heading-sub">Your driver is currently en route to your pickup point</span>
+                    </div>
+                    <div class="pc-header-meta">
+                        <div class="eta-pill-desktop">
+                            <span class="live-dot-pulse"></span>
+                            <span>Estimated Arrival: <strong id="etaArrivalValue">2 mins</strong></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pc-screen-2col">
+                    <!-- Left Column: Driver Card, Stepper, and SOS Trigger -->
+                    <div class="pc-sidebar-panel">
+                        <!-- Driver Profile Card -->
+                        <div class="desktop-driver-card">
+                            <div class="driver-pic-col">
+                                <img src="assets/driver_ravi.jpg" alt="Driver Ravi Kumar" class="d-avatar-large">
+                            </div>
+                            <div class="driver-meta-col">
+                                <h3 class="d-name">Ravi Kumar</h3>
+                                <div class="d-rating-pill">
+                                    <i class="fa-solid fa-star text-amber"></i>
+                                    <span>4.8 (245 rides)</span>
+                                </div>
+                                <span class="d-vehicle-tag" id="trackingVehicleBadge">Auto • TN 58 AB 1234</span>
+                            </div>
+                            <div class="driver-btns-col">
+                                <button type="button" class="btn-driver-circle btn-call" onclick="openDriverCallModal()"
+                                    title="Call Driver">
+                                    <i class="fa-solid fa-phone"></i>
+                                </button>
+                                <button type="button" class="btn-driver-circle btn-chat" onclick="openDriverChatModal()"
+                                    title="Message Driver">
+                                    <i class="fa-solid fa-message"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 3-Step Live Progress Stepper -->
+                        <div class="desktop-stepper-card">
+                            <h4 class="stepper-title">Trip Status</h4>
+                            <div class="stepper-track-row">
+                                <div class="step-point completed">
+                                    <div class="point-circle"><i class="fa-solid fa-check"></i></div>
+                                    <span class="point-label">Driver Assigned</span>
+                                </div>
+                                <div class="point-line completed"></div>
+                                <div class="step-point active">
+                                    <div class="point-circle pulse-blue"></div>
+                                    <span class="point-label">On the Way</span>
+                                </div>
+                                <div class="point-line"></div>
+                                <div class="step-point">
+                                    <div class="point-circle"></div>
+                                    <span class="point-label">Arriving</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3-Click SOS Emergency Banner with WhatsApp Integration -->
+                        <div class="desktop-sos-emergency-card">
+                            <div class="sos-card-header">
+                                <div class="sos-alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                <div>
+                                    <h4 class="sos-card-title">Emergency Assistance (SOS)</h4>
+                                    <p class="sos-card-sub">3 Clicks to WhatsApp: <strong>9342900780</strong></p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-trigger-sos-full" id="btnScreenSos"
+                                onclick="handleSosClick()"
+                                title="Click 3 times to send emergency WhatsApp message to 9342900780">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span class="sos-txt">CLICK SOS 3 TIMES</span>
+                                <span class="sos-tag" id="screenSosHint">3 Clicks to WhatsApp (9342900780)</span>
+                            </button>
+                        </div>
+
+                        <!-- Complete Ride & Rating Button -->
+                        <button type="button" class="btn-desktop-primary btn-complete-ride"
+                            onclick="navigateToScreen('screen-rating')">
+                            <span>Complete Ride & Rate Driver</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Right Column: Full Interactive Real Tracking Map -->
+                    <div class="pc-map-panel">
+                        <div class="leaflet-map-wrapper">
+                            <div id="driverTrackingMap" class="full-desktop-map"></div>
+
+                            <!-- Map Top Floating Bar -->
+                            <div class="map-floating-ctrls">
+                                <!-- Live Floating ETA Tooltip -->
+                                <div class="tracking-floating-eta" id="liveEtaFloatingPill">
+                                    <span class="live-pulse-dot"></span>
+                                    <span id="floatingEtaText">2 min away</span>
+                                </div>
+
+                                <div class="map-style-selector" role="group" aria-label="Map Style Switcher">
+                                    <button type="button" class="btn-map-style active" data-style="voyager"
+                                        onclick="setMapStyle('voyager')" title="Real Streets Navigation">
+                                        <i class="fa-solid fa-diamond-turn-right"></i> Streets
+                                    </button>
+                                    <button type="button" class="btn-map-style" data-style="satellite"
+                                        onclick="setMapStyle('satellite')" title="Real Satellite Aerial View">
+                                        <i class="fa-solid fa-satellite"></i> Satellite
+                                    </button>
+                                    <button type="button" class="btn-map-style" data-style="esriStreet"
+                                        onclick="setMapStyle('esriStreet')" title="ArcGIS HD Street Cartography">
+                                        <i class="fa-solid fa-layer-group"></i> HD Map
+                                    </button>
+                                    <button type="button" class="btn-map-style" data-style="dark"
+                                        onclick="setMapStyle('dark')" title="Night Dark Mode">
+                                        <i class="fa-solid fa-moon"></i> Night
+                                    </button>
+                                </div>
+
+                                <button type="button" class="btn-map-action" onclick="recenterTrackingMap()"
+                                    title="Recenter Driver Position">
+                                    <i class="fa-solid fa-crosshairs"></i> Recenter Driver
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- ====================================================
+                 SCREEN 8: HOW WAS YOUR RIDE? (RATING & FEEDBACK - PC SCREEN)
+                 ==================================================== -->
+            <section class="desktop-screen-card" id="screen-rating">
+                <div class="rating-desktop-container">
+                    <!-- Top Back Button -->
+                    <div class="confirm-topbar">
+                        <button type="button" class="btn-pc-back" onclick="navigateToScreen('screen-on-the-way')"
+                            title="Back to Driver Tracking">
+                            <i class="fa-solid fa-arrow-left"></i>
+                            <span>Back</span>
+                        </button>
+                    </div>
+
+                    <div class="rating-center-card">
+                        <div class="nav-logo-icon large"><i class="fa-solid fa-star"></i></div>
+                        <h2 class="rating-headline">How was your ride?</h2>
+                        <p class="rating-subheadline">Your feedback helps us continuously improve your experience</p>
+
+                        <!-- Driver Mini Card -->
+                        <div class="rating-driver-mini">
+                            <img src="assets/driver_ravi.jpg" alt="Ravi Kumar" class="r-avatar">
+                            <div>
+                                <h4 class="r-driver-name">Ravi Kumar</h4>
+                                <span class="r-driver-veh">TVS King Auto • TN 58 AB 1234</span>
+                            </div>
+                        </div>
+
+                        <!-- 5 Star Rating Box -->
+                        <div class="star-rating-desktop-box">
+                            <div class="stars-row" id="starsRow">
+                                <button type="button" class="star-btn filled" data-star="1" onclick="rateStars(1)"><i
+                                        class="fa-solid fa-star"></i></button>
+                                <button type="button" class="star-btn filled" data-star="2" onclick="rateStars(2)"><i
+                                        class="fa-solid fa-star"></i></button>
+                                <button type="button" class="star-btn filled" data-star="3" onclick="rateStars(3)"><i
+                                        class="fa-solid fa-star"></i></button>
+                                <button type="button" class="star-btn filled" data-star="4" onclick="rateStars(4)"><i
+                                        class="fa-solid fa-star"></i></button>
+                                <button type="button" class="star-btn" data-star="5" onclick="rateStars(5)"><i
+                                        class="fa-solid fa-star"></i></button>
+                            </div>
+                            <span class="rating-sentiment-badge" id="ratingSentimentText">Good</span>
+                        </div>
+
+                        <!-- Feedback Input -->
+                        <div class="feedback-input-box">
+                            <label class="fb-label">Tell us about your experience (optional)</label>
+                            <textarea id="feedbackText" class="feedback-textarea" rows="3"
+                                placeholder="Write your review or feedback here..."></textarea>
+                        </div>
+
+                        <!-- Category Tags -->
+                        <div class="feedback-chips-row">
+                            <button type="button" class="fb-tag-chip active"
+                                onclick="toggleFbTag(this)">Service</button>
+                            <button type="button" class="fb-tag-chip" onclick="toggleFbTag(this)">Driver</button>
+                            <button type="button" class="fb-tag-chip" onclick="toggleFbTag(this)">Ride Quality</button>
+                            <button type="button" class="fb-tag-chip" onclick="toggleFbTag(this)">Others</button>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="rating-actions-row">
+                            <button type="button" class="btn-desktop-primary" id="btnSubmitFeedback"
+                                onclick="handleSubmitFeedback()">
+                                <span>Submit Feedback</span>
+                            </button>
+                            <button type="button" class="btn-skip-link" onclick="handleSkipFeedback()">
+                                <span>Skip</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ========================================================
+         MODALS & OVERLAYS
+         ======================================================== -->
+
+    <!-- 1. SOS Emergency Modal -->
+    <div class="app-modal" id="modalSos">
+        <div class="modal-backdrop" onclick="closeSosModal()"></div>
+        <div class="modal-dialog sos-dialog">
+            <div class="sos-icon-wrap">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <h3 class="modal-title text-danger">Emergency Assistance</h3>
+            <p class="modal-desc">
+                Do you require immediate emergency help? We can open WhatsApp directed to <strong>+91 93429
+                    00780</strong> with your live GPS location or connect to Emergency Police (112).
+            </p>
+            <div class="sos-dialog-actions">
+                <button type="button" class="btn-sos-whatsapp" onclick="sendSosToWhatsApp()">
+                    <i class="fa-brands fa-whatsapp"></i> Send WhatsApp SOS (9342900780)
+                </button>
+                <button type="button" class="btn-sos-police" onclick="triggerPoliceCall()">
+                    <i class="fa-solid fa-phone"></i> Call Police (112)
+                </button>
+                <button type="button" class="btn-sos-cancel" onclick="closeSosModal()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Driver Call Modal -->
+    <div class="app-modal" id="modalDriverCall">
+        <div class="modal-backdrop" onclick="closeDriverCallModal()"></div>
+        <div class="modal-dialog call-dialog">
+            <div class="call-avatar-wrap">
+                <img src="assets/driver_ravi.jpg" alt="Ravi Kumar">
+            </div>
+            <h3 class="call-name">Ravi Kumar</h3>
+            <span class="call-status">Calling driver via SmartRaid VoIP...</span>
+            <span class="call-num">+91 98765 43210</span>
+            <div class="call-dialog-actions">
+                <button type="button" class="btn-end-call" onclick="closeDriverCallModal()">
+                    <i class="fa-solid fa-phone-slash"></i> End Call
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Driver Chat Modal -->
+    <div class="app-modal" id="modalDriverChat">
+        <div class="modal-backdrop" onclick="closeDriverChatModal()"></div>
+        <div class="modal-dialog chat-dialog">
+            <div class="chat-header">
+                <div class="chat-user">
+                    <img src="assets/driver_ravi.jpg" alt="Ravi Kumar" class="chat-avatar">
+                    <div>
+                        <h4 class="chat-name">Ravi Kumar</h4>
+                        <span class="chat-online">● Online • TVS King Auto</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-close-chat" onclick="closeDriverChatModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="chat-messages-box" id="chatMessagesBox">
+                <div class="chat-bubble incoming">
+                    <p>Hello! I am on the way to VIT University main gate. Arriving in 2 minutes.</p>
+                    <span class="chat-time">Just now</span>
+                </div>
+            </div>
+            <form class="chat-input-bar" onsubmit="handleSendChatMessage(event)">
+                <input type="text" id="chatInputText" placeholder="Type a message to driver..." autocomplete="off">
+                <button type="submit" class="btn-send-msg"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. Global Toast Notification -->
+    <div class="app-toast" id="appToast">
+        <div class="toast-content" id="toastMessage">Notification message</div>
+    </div>
+
+    <!-- ========================================================
+         SCRIPTS: LEAFLET & APPLICATION JS
+         ======================================================== -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
